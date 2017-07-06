@@ -36,7 +36,7 @@
       height: 100%;
       line-height: 100%;
       text-align: center;
-      background: #ddd;
+      background: #fff;
       li{
         flex: 1;
         font-size: 0.4rem;
