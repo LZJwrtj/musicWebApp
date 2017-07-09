@@ -1,26 +1,27 @@
 <template>
   <div id="hotList">
     <ul class="clear">
-      <li v-for="item in hotLists" @click.stop.prevent="play(item, $event)">
-        <!--<router-link to="{name:'hotListYe',params{}"></router-link>-->
-        <div class="img-wrapper">
-          <img :src="item.picUrl" alt="">
-          <span class="listen_count"><i class="fa fa-header"></i>{{(item.accessnum / 10000).toFixed(1)}}万</span>
-          <span class="icon_play"></span>
-        </div>
-        <div class="des">
-          <p class="des_title">{{item.songListDesc}}</p>
-          <p class="author">{{item.songListAuthor}}</p>
-        </div>
+      <li v-for="item in hotLists">
+        <router-link :to="{name:'hotListYe', params: {valId: item.id}}">
+          <div class="img-wrapper">
+            <img :src="item.picUrl" alt="">
+            <span class="listen_count"><i class="fa fa-header"></i>{{(item.accessnum / 10000).toFixed(1)}}万</span>
+            <span class="icon_play"></span>
+          </div>
+          <div class="des">
+            <p class="des_title">{{item.songListDesc}}</p>
+            <p class="author">{{item.songListAuthor}}</p>
+          </div>
+        </router-link>
       </li>
     </ul>
-    <v-hotListYe :selectedList="selectList" ref="hotListYe"></v-hotListYe>
+    <!--<v-hotListYe :selectedList="selectList" ref="hotListYe"></v-hotListYe>-->
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import hotListYe from '../hotListYe/hotListYe.vue'
-  import $ from 'jquery'
+//  import hotListYe from '../hotListYe/hotListYe.vue'
+//  import $ from 'jquery'
   export default {
     props: ['hotLists'],
     data () {
@@ -32,34 +33,28 @@
 
     },
     methods: {
-      play: function (item, event) {
-        if (!event.constructor) {
-          return
-        }
-//        this.selectList = item
-        var that = this
-        $.ajax({
-          url: 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg?g_tk=5381&uin=0&format=jsonp&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&new_format=1&pic=500&type=1&json=1&utf8=1&onlysong=0&nosign=1&disstid=' + item.id,
-          type: 'GET',
-          dataType: 'jsonp',
-          jsonp: 'jsonpCallback',
-          jsonpCallback: 'taogeDataCallback',
-          success: function (res) {
-            that.selectList = res.cdlist[0]
-            console.log(that.selectList)
-          },
-          error: function (err) {
-            console.log(err)
-          }
-        })
-        this.$refs.hotListYe.show()
+//      showList: function (item, event) {
+//        if (!event.constructor) {
+//          return
+//        }
+//        var that = this
+//        $.ajax({
+//          url: 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg?g_tk=5381&uin=0&format=jsonp&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&new_format=1&pic=500&type=1&json=1&utf8=1&onlysong=0&nosign=1&disstid=' + item.id,
+//          type: 'GET',
+//          dataType: 'jsonp',
+//          jsonp: 'jsonpCallback',
+//          jsonpCallback: 'taogeDataCallback',
+//          success: function (res) {
+//            that.selectList = res.cdlist[0]
+//          },
+//          error: function (err) {
+//            console.log(err)
+//          }
+//        })
+//        this.$refs.hotListYe.show()
 //        console.log(this.selectList)
-      }
-    },
-    components: {
-      'v-hotListYe': hotListYe
+//      }
     }
-
   }
 </script>
 
@@ -69,6 +64,7 @@
     ul{
       width: 7.26rem;
       margin-left: 0.2rem;
+      margin-bottom: 1.7rem;
       li{
         float: left;
         width: 3.47rem;
@@ -98,7 +94,7 @@
             background-repeat:  no-repeat;
             background-position: 0 0;
             background-size: 0.48rem 1.2rem;
-            z-index: 10;
+            z-index: 5;
           }
           img{
             width: 100%;

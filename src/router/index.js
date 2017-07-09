@@ -5,6 +5,7 @@ import rank from '@/components/rank/rank'
 import songList from '@/components/songList/songList'
 import radio from '@/components/radio/radio'
 import MV from '@/components/MV/MV'
+import hotListYe from '../components/hotListYe/hotListYe.vue'
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export default new Router({
     {
       path: '*',
       redirect: '/recommend'
+    },
+    {
+      name: 'hotListYe',
+      path: '/hotListYe/:valId',
+      component: hotListYe
     }
   ]
 })

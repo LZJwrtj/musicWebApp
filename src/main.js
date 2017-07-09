@@ -5,10 +5,12 @@ import App from './App'
 import router from './router'
 import vueResource from 'vue-resource'
 import VueAwesomeSweper from 'vue-awesome-swiper'
-// import $ from 'jquery'
-// Vue.use($)
-Vue.use(VueAwesomeSweper)
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+import store from './store'
 
+Vue.use(VueAwesomeSweper)
+Vue.use(MintUI)
 Vue.use(vueResource)
 // import axios from 'axios'
 // Vue.prototype.$http = axios
@@ -19,6 +21,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

@@ -17,9 +17,6 @@
         <router-link to="/mv">MV</router-link>
       </li>
     </ul>
-    <div>
-      <router-view></router-view>
-    </div>
   </div>
 </template>
 
@@ -33,8 +30,8 @@
     height: 1rem;
     ul{
       display: flex;
-      height: 100%;
-      line-height: 100%;
+      height: 1rem;
+      line-height: 1rem;
       text-align: center;
       background: #fff;
       li{
