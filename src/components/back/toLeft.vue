@@ -1,11 +1,18 @@
 <template>
-  <div id="back" @click="$router.go(-1)">
+  <div id="back" @click="back">
     <span class="fa fa-arrow-left"></span>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-
+  export default {
+    methods: {
+      back: function () {
+        this.$store.dispatch('close')
+        this.$router.go(-1)
+      }
+    }
+  }
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>

@@ -8,5 +8,6 @@ export default {
   isShowRouter: true,
   isShowPlay: false, // 是否显示播放页面
   isShowPlayBar: true,
-  playState: false
+  playState: false,
+  isMusicList: false
 }

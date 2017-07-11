@@ -19,5 +19,22 @@ export default {
   },
   location (state) {
     return state.location
+  },
+  songImg (state) {
+    if (state.musicList.length === 0) {
+      return '/static/img/defaultSongImg.jpg'
+    } else {
+      return 'https://y.gtimg.cn/music/photo_new/T002R150x150M000' + state.musicList[state.musicPlace].album.mid + '.jpg?max_age=2592000'
+    }
+  },
+  songInfo (state) {
+    if (state.musicList.length === 0) {
+      return {name: 'qq音乐', author: '最好听的音乐'}
+    } else {
+      return {name: state.musicList[state.musicPlace].name, author: state.musicList[state.musicPlace].singer[0].name}
+    }
+  },
+  isMusicList (state) {
+    return state.isMusicList
   }
 }

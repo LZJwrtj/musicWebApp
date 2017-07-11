@@ -10,8 +10,7 @@
     </div>
     <v-play v-show="isShowPlay"></v-play>
     <v-playBar v-show="isShowPlayBar"></v-playBar>
-    <audio src="" ref="audio" autoplay></audio>
-    <div>{{location}}</div>
+    <audio :src="location" ref="audio" autoplay></audio>
   </div>
 </template>
 

@@ -1,26 +1,36 @@
 <template>
   <div id="playBar" >
+    <v-music ></v-music>
     <ul class="clear">
       <li class="playBar_l">
-        <img class="avatar" src="./defaultSongImg.jpg" @click="showPlay" alt="">
+        <img class="avatar" :src="songImg" @click="showPlay" alt="">
       </li>
       <li class="playBar_c">
-        <p class="song_name">你啊多少</p>
-        <p class="song_author">阿斯顿</p>
+        <p class="song_name">{{songInfo.name}}</p>
+        <p class="song_author">{{songInfo.author}}</p>
       </li>
       <li class="playBar_r">
-        <span class="fa fa-play"></span>
-        <span class="fa fa-forward"></span>
-        <span class="fa fa-bars"></span>
+        <span :class="btnClass" @click="play" ></span>
+        <span class="fa fa-forward" @click="nextSong"></span>
+        <span class="fa fa-bars" @click="showMusicList"></span>
       </li>
     </ul>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {mapActions} from 'vuex'
+  import {mapActions, mapGetters} from 'vuex'
+  import musicList from '../musicList/musicList.vue'
   export default {
-    methods: mapActions(['showPlay'])
+    methods: {
+      ...mapActions(['showPlay', 'play', 'nextSong', 'showMusicList'])
+    },
+    computed: {
+      ...mapGetters(['btnClass', 'songImg', 'songInfo'])
+    },
+    components: {
+      'v-music': musicList
+    }
   }
 </script>
 
@@ -52,6 +62,11 @@
       margin-left: 0.32rem;
       margin-top: 0.34rem;
       font-size: 0.3rem;
+      .song_name, .song_author{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
       .song_name{
         width: 100%;
         height: 0.47rem;
@@ -69,7 +84,7 @@
       line-height: 1.6rem;
       span{
         margin-right: 0.4rem;
-        font-size: 0.65rem;
+        font-size: 0.6rem;
       }
     }
   }

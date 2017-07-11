@@ -15,7 +15,7 @@
           <div class="gradient"></div>
         </div>
         <ul class="songList">
-          <li v-for="(item, index) in cdLists.songlist" @click="$store.dispatch('addMusic', 1)">
+          <li v-for="(item, index) in cdLists.songlist" @click="$store.dispatch('addMusic', item)">
             <!--<router-link :to="{name: 'play', params: {val: item}}">-->
             <h3 class="song_name">{{item.name}}(Live)</h3>
             <p class="song_des">{{item.singer[0].name}}·{{item.album.title}}</p>

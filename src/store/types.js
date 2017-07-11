@@ -1,6 +1,10 @@
 export const SHOWPLAY = 'SHOWPLAY'
 export const HIDEPLAY = 'HIDEPLAY'
 export const PLAY = 'PLAY'
+export const PAUSE = 'PAUSE'
+export const PREVSONG = 'PREVSONG'
+export const NEXTSONG = 'NEXTSONG'
 export const ADDMUSIC = 'ADDMUSIC'
 export const SENDAUDIO = 'SENDAUDIO'
-
+export const SHOWMUSICLIST = 'SHOWMUSICLIST'
+export const CLOSE = 'CLOSE'

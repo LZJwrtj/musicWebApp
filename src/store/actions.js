@@ -12,10 +12,33 @@ export default {
   sendAudio ({commit}, obj) {
     commit(types.SENDAUDIO, obj)
   },
-  addmusic ({commit}, obj) {
+  addMusic ({commit}, obj) {
     commit(types.ADDMUSIC, obj)
   },
-  play ({commit}) {
-    commit(types.PLAY)
+  play ({commit, state}) {
+    if (state.musicList.length !== 0) {
+      if (state.playState) {
+        state.audio.pause()
+        commit(types.PAUSE)
+      } else {
+        state.audio.play()
+        commit(types.PLAY)
+      }
+    }
+  },
+  pause: ({commit}) => {
+    commit(types.PAUSE)
+  },
+  prevSong: ({commit}) => {
+    commit(types.PREVSONG)
+  },
+  nextSong: ({commit}) => {
+    commit(types.NEXTSONG)
+  },
+  showMusicList: ({commit}) => {
+    commit(types.SHOWMUSICLIST)
+  },
+  close: ({commit}) => {
+    commit(types.CLOSE)
   }
 }
