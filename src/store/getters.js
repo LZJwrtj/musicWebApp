@@ -36,5 +36,25 @@ export default {
   },
   isMusicList (state) {
     return state.isMusicList
+  },
+  musicLists (state) {
+    if (state.musicList.length === 0) {
+      return false
+    } else {
+      return state.musicList
+    }
+  },
+  nowSong (state) {
+    if (state.musicPlace === -1) {
+      return {id: -1}
+    } else {
+      return state.musicList[state.musicPlace]
+    }
+  },
+  currentTime (state) {
+    return state.currentTime
+  },
+  duration (state) {
+    return state.duration
   }
 }

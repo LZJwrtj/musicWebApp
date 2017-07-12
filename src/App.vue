@@ -10,12 +10,12 @@
     </div>
     <v-play v-show="isShowPlay"></v-play>
     <v-playBar v-show="isShowPlayBar"></v-playBar>
-    <audio :src="location" ref="audio" autoplay></audio>
+    <audio :src="location" ref="audio" autoplay @canplay="getDuration" @timeupdate="getCurrentTime"></audio>
   </div>
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
   import header from './components/header/header.vue'
   import nav from './components/nav/nav.vue'
   import play from './components/play/play.vue'
@@ -32,6 +32,9 @@
         'isShowPlayBar',
         'location'
       ])
+    },
+    methods: {
+      ...mapActions(['getDuration', 'getCurrentTime'])
     },
     mounted () {
       this.$store.dispatch('sendAudio', this.$refs.audio)

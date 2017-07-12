@@ -10,11 +10,11 @@
         <img :src="songImg" alt="">
       </div>
       <ul class="lyrics">
-        <li>努力开发中...</li>
+        <li v-for="item in lyrics">{{item}}</li>
       </ul>
       <mt-range v-model="val" class="process">
-        <div slot="start" class="start">0%</div>
-        <div slot="end" class="end">100%</div>
+        <div slot="start" class="start">{{currentTime | date}}</div>
+        <div slot="end" class="end">{{duration | date}}</div>
       </mt-range>
       <div class="play_bar">
         <div class="play_bar_l">
@@ -31,12 +31,24 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {mapActions, mapGetters} from 'vuex'
+  import Vue from 'vue'
+  import { mapActions, mapGetters } from 'vuex'
   import musicList from '../musicList/musicList.vue'
+  import $ from 'jquery'
+  import Base64 from '../../assets/js/base64'
+  import parseLyc from '../../assets/js/lyc'
+
+  Vue.filter('date', function (val) {
+    var time = new Date()
+    time.setTime(val * 1000)
+    var sec = time.getSeconds() > 10 ? time.getSeconds() : '0' + time.getSeconds()
+    return time.getMinutes() + ':' + sec
+  })
   export default {
     data () {
       return {
-        val: 50
+        val: 0,
+        lyrics: []
       }
     },
     computed: {
@@ -44,8 +56,14 @@
         'btnClass',
         'songInfo',
         'songImg',
-        'isMusicList'
+        'isMusicList',
+        'nowSong',
+        'currentTime',
+        'duration'
       ])
+    },
+    mounted () {
+      this.getLycs()
     },
     methods: {
       ...mapActions([
@@ -55,7 +73,31 @@
         'nextSong',
         'showMusicList',
         'close'
-      ])
+      ]),
+      getLycs: function () {
+        if (this.nowSong.id !== -1) {
+          var that = this
+          $.ajax({
+            url: 'https://api.darlin.me/music/lyric/' + this.nowSong.id + '/?',
+            type: 'GET',
+            dataType: 'jsonp',
+            jsonp: 'jsonpCallback',
+            jsonpCallback: 'MusicJsonCallback',
+            success: function (res) {
+              var base = new Base64()
+              that.lyrics = parseLyc(base.decode(res.lyric))
+            },
+            error: function (res) {
+              console.log(res)
+            }
+          })
+        }
+      }
+    },
+    watch: {
+      nowSong () {
+        this.getLycs()
+      }
     },
     components: {
       'v-music': musicList
@@ -124,13 +166,16 @@
     }
     .lyrics {
       width: 6rem;
-      height: 1rem;
+      height: 2.9rem;
       margin: 0 auto 1rem;
-      background: #98f9c9;
+      overflow: hidden;
       li {
         width: 100%;
+        height: 0.5rem;
+        line-height: 0.5rem;
         text-align: center;
-        font-size: 0.4rem;
+        font-size: 0.3rem;
+        color: #000;
       }
     }
     .process {
@@ -139,16 +184,16 @@
       bottom: 1.5rem;
       width: 85%;
       margin: 0 auto;
-      .start,.end{
+      .start, .end {
         font-size: 0.25rem;
       }
-      .start{
+      .start {
         margin-right: 0.2rem;
       }
-      .end{
+      .end {
         margin-left: 0.2rem;
       }
-      .mt-range-thumb{
+      .mt-range-thumb {
         width: 10px;
         height: 10px;
       }

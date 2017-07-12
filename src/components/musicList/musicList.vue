@@ -1,11 +1,12 @@
 <template>
   <transition name="moveUp">
     <div id="musicList" v-show="isMusicList">
-      <h3 class="title">播放列表</h3>
+      <h3 class="title">播放列表({{musicLists ? musicLists.length : 0}}首)</h3>
       <span class="close" @click="close"><i class="fa fa-close"></i></span>
       <ul class="musicList_cotent">
-        <li>{{songInfo.name}}-{{songInfo.author}}</li>
-
+        <li v-for="(item, index) in musicLists">
+          <p>{{index + 1}}.{{item.name}}<i class="fa fa-close"></i></p>
+        </li>
       </ul>
     </div>
   </transition>
@@ -18,7 +19,7 @@
       ...mapActions(['close'])
     },
     computed: {
-      ...mapGetters(['songInfo', 'isMusicList'])
+      ...mapGetters(['songInfo', 'isMusicList', 'musicLists'])
     }
   }
 </script>
@@ -56,19 +57,34 @@
       height: 0.8rem;
       line-height: 0.8rem;
       text-align: center;
-      font-size: 0.45rem;
+      font-size: 0.5rem;
       color: #ffffff;
     }
-    .musicList_cotent{
+    .musicList_cotent {
       width: 100%;
+      margin-top: 0.3rem;
+      margin-bottom: 0.3rem;
       padding-left: 0.2rem;
-      li{
+      box-sizing: border-box;
+      li {
+        position: relative;
         width: 100%;
-        height: 0.6rem;
-        line-height: 0.6rem;
+        height: 0.9rem;
+        line-height: 0.9rem;
         font-size: 0.3rem;
         color: #ffffff;
         border-bottom: 1px solid #ccc;
+        i{
+          position: absolute;
+          top: 0.2rem;
+          right: 0.3rem;
+          width: 0.4rem;
+          height: 0.4rem;
+          line-height: 0.4rem;
+          text-align: center;
+          font-size: 0.45rem;
+          color: #fff;
+        }
       }
     }
   }

@@ -40,5 +40,12 @@ export default {
   },
   close: ({commit}) => {
     commit(types.CLOSE)
+  },
+  getDuration: ({commit}) => {
+    commit(types.GETDURATION)
+  },
+  getCurrentTime: ({commit}) => {
+    commit(types.GETCURRENTTIME)
   }
+
 }

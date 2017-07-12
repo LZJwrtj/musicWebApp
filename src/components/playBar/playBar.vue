@@ -44,6 +44,7 @@
     /*padding: 0 0.3rem;*/
     padding-left: 0.3rem;
     z-index: 10;
+    box-sizing: border-box;
     background: #fff;
     .playBar_l{
       width: 1.13rem;
@@ -58,7 +59,7 @@
     }
     .playBar_c{
       float: left;
-      width: 2.5rem;
+      width: 2.8rem;
       margin-left: 0.32rem;
       margin-top: 0.34rem;
       font-size: 0.3rem;
@@ -83,7 +84,7 @@
       height: 1.6rem;
       line-height: 1.6rem;
       span{
-        margin-right: 0.4rem;
+        margin-right: 0.2rem;
         font-size: 0.6rem;
       }
     }

@@ -54,5 +54,11 @@ export default {
   },
   [types.CLOSE] (state) {
     state.isMusicList = false
+  },
+  [types.GETCURRENTTIME] (state) {
+    state.currentTime = state.audio.currentTime
+  },
+  [types.GETDURATION] (state) {
+    state.duration = state.audio.duration
   }
 }
