@@ -10,9 +10,9 @@
         <img :src="songImg" alt="">
       </div>
       <ul class="lyrics">
-        <li v-for="item in lyrics">{{item}}</li>
+        <li v-for="item in lyrics">{{item.txt}}</li>
       </ul>
-      <mt-range v-model="val" class="process">
+      <mt-range v-model="val" class="process" @change="moveSetTime">
         <div slot="start" class="start">{{currentTime | date}}</div>
         <div slot="end" class="end">{{duration | date}}</div>
       </mt-range>
@@ -35,8 +35,10 @@
   import { mapActions, mapGetters } from 'vuex'
   import musicList from '../musicList/musicList.vue'
   import $ from 'jquery'
-  import Base64 from '../../assets/js/base64'
-  import parseLyc from '../../assets/js/lyc'
+  //  import Base64 from '../../assets/js/base64'
+  //  import parseLyc from '../../assets/js/lyc'
+  import { Base64 } from 'js-base64'
+  import Lyric from 'lyric-parser'
 
   Vue.filter('date', function (val) {
     var time = new Date()
@@ -48,7 +50,8 @@
     data () {
       return {
         val: 0,
-        lyrics: []
+        lyrics: [],
+        time: 0
       }
     },
     computed: {
@@ -72,8 +75,16 @@
         'play',
         'nextSong',
         'showMusicList',
-        'close'
+        'setCurrentTime'
       ]),
+      moveSetTime: function () {
+        if (this.duration > 0) {
+          setTimeout(() => {
+            this.setCurrentTime(this.val * this.duration / 100);
+          }, 0);
+
+        }
+      },
       getLycs: function () {
         if (this.nowSong.id !== -1) {
           var that = this
@@ -84,8 +95,8 @@
             jsonp: 'jsonpCallback',
             jsonpCallback: 'MusicJsonCallback',
             success: function (res) {
-              var base = new Base64()
-              that.lyrics = parseLyc(base.decode(res.lyric))
+              let lyric = new Lyric(Base64.decode(res.lyric))
+              that.lyrics = lyric.lines
             },
             error: function (res) {
               console.log(res)
@@ -97,6 +108,12 @@
     watch: {
       nowSong () {
         this.getLycs()
+      },
+      currentTime () {
+        this.time = parseInt(this.currentTime)
+      },
+      time () {
+        this.val = (this.currentTime / this.duration).toFixed(4) * 100
       }
     },
     components: {

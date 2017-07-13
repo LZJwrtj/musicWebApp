@@ -60,5 +60,8 @@ export default {
   },
   [types.GETDURATION] (state) {
     state.duration = state.audio.duration
+  },
+  [types.SETCURRENTTIME] (state, time) {
+    state.audio.currentTime = time
   }
 }

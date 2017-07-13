@@ -15,45 +15,16 @@
         </router-link>
       </li>
     </ul>
-    <!--<v-hotListYe :selectedList="selectList" ref="hotListYe"></v-hotListYe>-->
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-//  import hotListYe from '../hotListYe/hotListYe.vue'
-//  import $ from 'jquery'
   export default {
     props: ['hotLists'],
     data () {
       return {
         selectList: {}
       }
-    },
-    computed: {
-
-    },
-    methods: {
-//      showList: function (item, event) {
-//        if (!event.constructor) {
-//          return
-//        }
-//        var that = this
-//        $.ajax({
-//          url: 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg?g_tk=5381&uin=0&format=jsonp&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&new_format=1&pic=500&type=1&json=1&utf8=1&onlysong=0&nosign=1&disstid=' + item.id,
-//          type: 'GET',
-//          dataType: 'jsonp',
-//          jsonp: 'jsonpCallback',
-//          jsonpCallback: 'taogeDataCallback',
-//          success: function (res) {
-//            that.selectList = res.cdlist[0]
-//          },
-//          error: function (err) {
-//            console.log(err)
-//          }
-//        })
-//        this.$refs.hotListYe.show()
-//        console.log(this.selectList)
-//      }
     }
   }
 </script>

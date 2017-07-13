@@ -13,9 +13,11 @@
   "dependencies": {
     "axios": "^0.16.2",
     "jquery": "^3.2.1",
+    "js-base64": "^2.1.9",
     "jsonp": "^0.2.1",
     "less": "^2.7.2",
     "less-loader": "^4.0.4",
+    "lyric-parser": "^1.0.1",
     "muse-ui": "^2.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",

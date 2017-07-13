@@ -46,6 +46,10 @@ export default {
   },
   getCurrentTime: ({commit}) => {
     commit(types.GETCURRENTTIME)
+  },
+  setCurrentTime: ({commit, state}, time) => {
+    if (state.musicPlace !== -1) {
+      commit(types.SETCURRENTTIME, time)
+    }
   }
-
 }
