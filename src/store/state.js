@@ -11,5 +11,6 @@ export default {
   isShowPlay: false, // 是否显示播放页面
   isShowPlayBar: true,
   playState: false,
-  isMusicList: false
+  isMusicList: false,
+  lyric: null
 }

@@ -19,9 +19,11 @@ export default {
     if (state.musicList.length !== 0) {
       if (state.playState) {
         state.audio.pause()
+        state.lyric.togglePlay()
         commit(types.PAUSE)
       } else {
         state.audio.play()
+        state.lyric.togglePlay()
         commit(types.PLAY)
       }
     }
@@ -51,5 +53,8 @@ export default {
     if (state.musicPlace !== -1) {
       commit(types.SETCURRENTTIME, time)
     }
+  },
+  sendLyc: ({commit}, lyric) => {
+    commit(types.SENDLYC, lyric)
   }
 }

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "better-scroll": "^0.4.0",
     "jquery": "^3.2.1",
     "js-base64": "^2.1.9",
     "jsonp": "^0.2.1",

@@ -6,6 +6,7 @@ import songList from '@/components/songList/songList'
 import radio from '@/components/radio/radio'
 import MV from '@/components/MV/MV'
 import hotListYe from '../components/hotListYe/hotListYe.vue'
+import rankList from '../components/rankList/rankList.vue'
 
 Vue.use(Router)
 
@@ -18,6 +19,10 @@ export default new Router({
     {
       path: '/rank',
       component: rank
+      // children: [{
+      //   path: ':valId',
+      //   component: rankList
+      // }]
     },
     {
       path: '/songList',
@@ -39,6 +44,11 @@ export default new Router({
       name: 'hotListYe',
       path: '/hotListYe/:valId',
       component: hotListYe
+    },
+    {
+      name: 'rankList',
+      path: '/rankList/:valId',
+      component: rankList
     }
   ]
 })

@@ -44,7 +44,7 @@ export default {
     if (state.musicPlace === state.musicList.length - 1) {
       state.musicPlace = 0
     } else {
-      state.musicPlace ++
+      state.musicPlace++
     }
     state.playState = true
     state.location = 'http://ws.stream.qqmusic.qq.com/' + state.musicList[state.musicPlace].id + '.m4a?fromtag=46'
@@ -63,5 +63,9 @@ export default {
   },
   [types.SETCURRENTTIME] (state, time) {
     state.audio.currentTime = time
+  },
+  [types.SENDLYC] (state, lyric) {
+    state.lyric = lyric
   }
+
 }

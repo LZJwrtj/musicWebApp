@@ -56,5 +56,8 @@ export default {
   },
   duration (state) {
     return state.duration
+  },
+  playing (state) {
+    return state.playState
   }
 }

@@ -9,7 +9,8 @@
       <router-view></router-view>
     </div>
     <v-play v-show="isShowPlay"></v-play>
-    <v-playBar v-show="isShowPlayBar"></v-playBar>
+    <!--<v-playBar v-show="isShowPlayBar"></v-playBar>-->
+    <v-playBar v-show="musicLists"></v-playBar>
     <audio :src="location" ref="audio" autoplay @canplay="getDuration" @timeupdate="getCurrentTime"></audio>
   </div>
 </template>
@@ -30,7 +31,8 @@
         'isShowRouter',
         'isShowPlay',
         'isShowPlayBar',
-        'location'
+        'location',
+        'musicLists'
       ])
     },
     methods: {

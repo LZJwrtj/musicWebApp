@@ -9,9 +9,13 @@
       <div class="avatar_wrapper">
         <img :src="songImg" alt="">
       </div>
-      <ul class="lyrics">
-        <li v-for="item in lyrics">{{item.txt}}</li>
-      </ul>
+      <scroll class="lyric-container" ref="lyricList" :data="lyrics && lyrics.lines">
+        <div class="lyric-wrapper">
+          <div v-if="lyrics">
+            <p ref="lyricLine" :class="{'active': currentLineNum === index}" v-for="(item, index) in lyrics.lines">{{item.txt}}</p>
+          </div>
+        </div>
+      </scroll>
       <mt-range v-model="val" class="process" @change="moveSetTime">
         <div slot="start" class="start">{{currentTime | date}}</div>
         <div slot="end" class="end">{{duration | date}}</div>
@@ -34,11 +38,9 @@
   import Vue from 'vue'
   import { mapActions, mapGetters } from 'vuex'
   import musicList from '../musicList/musicList.vue'
-  import $ from 'jquery'
-  //  import Base64 from '../../assets/js/base64'
-  //  import parseLyc from '../../assets/js/lyc'
   import { Base64 } from 'js-base64'
   import Lyric from 'lyric-parser'
+  import Scroll from '../scroll/scroll.vue'
 
   Vue.filter('date', function (val) {
     var time = new Date()
@@ -51,7 +53,8 @@
       return {
         val: 0,
         lyrics: [],
-        time: 0
+        time: 0,
+        currentLineNum: 0
       }
     },
     computed: {
@@ -62,11 +65,12 @@
         'isMusicList',
         'nowSong',
         'currentTime',
-        'duration'
+        'duration',
+        'playing'
       ])
     },
     mounted () {
-      this.getLycs()
+//      this.getLycs()
     },
     methods: {
       ...mapActions([
@@ -80,34 +84,64 @@
       moveSetTime: function () {
         if (this.duration > 0) {
           setTimeout(() => {
-            this.setCurrentTime(this.val * this.duration / 100);
-          }, 0);
-
+            this.setCurrentTime(this.val * this.duration / 100)
+            this.lyrics.seek(this.val * this.duration / 100 * 1000)
+          }, 0)
         }
       },
       getLycs: function () {
         if (this.nowSong.id !== -1) {
-          var that = this
-          $.ajax({
-            url: 'https://api.darlin.me/music/lyric/' + this.nowSong.id + '/?',
-            type: 'GET',
-            dataType: 'jsonp',
-            jsonp: 'jsonpCallback',
-            jsonpCallback: 'MusicJsonCallback',
-            success: function (res) {
-              let lyric = new Lyric(Base64.decode(res.lyric))
-              that.lyrics = lyric.lines
-            },
-            error: function (res) {
-              console.log(res)
+//          var that = this
+//          $.ajax({
+//            url: 'https://api.darlin.me/music/lyric/' + this.nowSong.id + '/?',
+//            type: 'GET',
+//            dataType: 'jsonp',
+//            jsonp: 'jsonpCallback',
+//            jsonpCallback: 'MusicJsonCallback',
+//            success: function (res) {
+//              var lyc = Base64.decode(res.lyric)
+//              that.lyrics = new Lyric(lyc, that.handleLyric)
+//              if (this.playing) {
+//                that.lyrics.play()
+//              }
+//            },
+//            error: function (res) {
+//              console.log(res)
+//            }
+//          })
+          this.$http.jsonp('https://api.darlin.me/music/lyric/' + this.nowSong.id + '/?').then(function (res) {
+            var lyc = Base64.decode(res.data.lyric)
+            this.lyrics = new Lyric(lyc, this.handleLyric)
+            this.$store.dispatch('sendLyc', this.lyrics)
+            if (this.playing) {
+              this.lyrics.play()
             }
           })
+        }
+      },
+      handleLyric ({lineNum, txt}) {
+        this.currentLineNum = lineNum
+        console.log(this.currentLineNum)
+        console.log(txt)
+        if (lineNum > 4) {
+          let lineEl = this.$refs.lyricLine[lineNum - 4]
+          this.$refs.lyricList.scrollToElement(lineEl, 1000)
+        } else {
+          this.$refs.lyricList.scrollTo(0, 0, 1000)
         }
       }
     },
     watch: {
-      nowSong () {
-        this.getLycs()
+      nowSong (newSong, oldSong) {
+        if (newSong.id === oldSong.id) {
+          return
+        }
+        setTimeout(() => {
+          this.getLycs()
+        }, 1000)
+        if (this.lyrics) {
+          this.lyrics.stop()
+        }
       },
       currentTime () {
         this.time = parseInt(this.currentTime)
@@ -117,7 +151,8 @@
       }
     },
     components: {
-      'v-music': musicList
+      'v-music': musicList,
+      Scroll
     }
   }
 </script>
@@ -181,20 +216,31 @@
         height: 100%;
       }
     }
-    .lyrics {
-      width: 6rem;
-      height: 2.9rem;
-      margin: 0 auto 1rem;
+    .lyric-container {
+      width: 100%;
+      height: 30%;
       overflow: hidden;
-      li {
-        width: 100%;
-        height: 0.5rem;
-        line-height: 0.5rem;
-        text-align: center;
-        font-size: 0.3rem;
-        color: #000;
+      .lyric-wrapper {
+        width: 6rem;
+        /*height: 2.9rem;*/
+        /*height: 2rem;*/
+        /*height: 100%;*/
+        margin: 0 auto 1rem;
+        /*overflow: hidden;*/
+        p {
+          width: 100%;
+          height: 0.5rem;
+          line-height: 0.5rem;
+          text-align: center;
+          font-size: 0.3rem;
+          color: #000;
+          &.active {
+            color: #f46;
+          }
+        }
       }
     }
+
     .process {
       position: absolute;
       left: 9%;
