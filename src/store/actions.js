@@ -37,6 +37,9 @@ export default {
   nextSong: ({commit}) => {
     commit(types.NEXTSONG)
   },
+  loopPlay: ({commit}) => {
+    commit(types.LOOPPLAY)
+  },
   showMusicList: ({commit}) => {
     commit(types.SHOWMUSICLIST)
   },

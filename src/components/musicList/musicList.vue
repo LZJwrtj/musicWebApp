@@ -5,7 +5,7 @@
       <span class="close" @click="close"><i class="fa fa-close"></i></span>
       <ul class="musicList_cotent">
         <li v-for="(item, index) in musicLists">
-          <p>{{index + 1}}.{{item.name}}<i class="fa fa-close"></i></p>
+          <p>{{index + 1}}.{{item.name ? item.name : item.songname}}<i class="fa fa-close"></i></p>
         </li>
       </ul>
     </div>
@@ -74,7 +74,7 @@
         font-size: 0.3rem;
         color: #ffffff;
         border-bottom: 1px solid #ccc;
-        i{
+        i {
           position: absolute;
           top: 0.2rem;
           right: 0.3rem;

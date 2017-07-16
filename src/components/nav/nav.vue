@@ -3,9 +3,7 @@
     <ul>
       <router-link tag="li" to="/recommend">精选</router-link>
       <router-link tag="li" to="/rank">排行</router-link>
-      <router-link tag="li" to="/songList">歌单</router-link>
-      <router-link tag="li" to="/radio">电台</router-link>
-      <router-link tag="li" to="/mv">MV</router-link>
+      <router-link tag="li" to="/search">搜索</router-link>
     </ul>
   </div>
 </template>

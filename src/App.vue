@@ -11,7 +11,7 @@
     <v-play v-show="isShowPlay"></v-play>
     <!--<v-playBar v-show="isShowPlayBar"></v-playBar>-->
     <v-playBar v-show="musicLists"></v-playBar>
-    <audio :src="location" ref="audio" autoplay @canplay="getDuration" @timeupdate="getCurrentTime"></audio>
+    <audio :src="location" ref="audio" autoplay @canplay="getDuration" @timeupdate="getCurrentTime" @ended="loopPlay"></audio>
   </div>
 </template>
 
@@ -36,7 +36,7 @@
       ])
     },
     methods: {
-      ...mapActions(['getDuration', 'getCurrentTime'])
+      ...mapActions(['getDuration', 'getCurrentTime', 'loopPlay'])
     },
     mounted () {
       this.$store.dispatch('sendAudio', this.$refs.audio)

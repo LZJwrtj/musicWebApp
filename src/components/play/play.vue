@@ -91,25 +91,8 @@
       },
       getLycs: function () {
         if (this.nowSong.id !== -1) {
-//          var that = this
-//          $.ajax({
-//            url: 'https://api.darlin.me/music/lyric/' + this.nowSong.id + '/?',
-//            type: 'GET',
-//            dataType: 'jsonp',
-//            jsonp: 'jsonpCallback',
-//            jsonpCallback: 'MusicJsonCallback',
-//            success: function (res) {
-//              var lyc = Base64.decode(res.lyric)
-//              that.lyrics = new Lyric(lyc, that.handleLyric)
-//              if (this.playing) {
-//                that.lyrics.play()
-//              }
-//            },
-//            error: function (res) {
-//              console.log(res)
-//            }
-//          })
-          this.$http.jsonp('https://api.darlin.me/music/lyric/' + this.nowSong.id + '/?').then(function (res) {
+          var id = this.nowSong.songid ? this.nowSong.songid : this.nowSong.id
+          this.$http.jsonp('https://api.darlin.me/music/lyric/' + id + '/?').then(function (res) {
             var lyc = Base64.decode(res.data.lyric)
             this.lyrics = new Lyric(lyc, this.handleLyric)
             this.$store.dispatch('sendLyc', this.lyrics)
@@ -121,8 +104,6 @@
       },
       handleLyric ({lineNum, txt}) {
         this.currentLineNum = lineNum
-        console.log(this.currentLineNum)
-        console.log(txt)
         if (lineNum > 4) {
           let lineEl = this.$refs.lyricLine[lineNum - 4]
           this.$refs.lyricList.scrollToElement(lineEl, 1000)

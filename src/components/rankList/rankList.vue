@@ -3,9 +3,11 @@
     <div id="hotListYe">
       <div class="list_content">
         <div class="img_wrapper">
-          <img :src="topData.topinfo.pic_album" alt="">
+          <!--<img :src="topData.topinfo.pic_album" alt="">-->
+          <img :src="topInfo.pic_album" alt="">
           <div class="list_info">
-            <div class="des_title">{{topData.topinfo.ListName}}</div>
+            <!--<div class="des_title">{{topData.topinfo.ListName}}</div>-->
+            <div class="des_title">{{topInfo.ListName}}</div>
             <div class="count_author">
               <span class="listen_count">{{topData.update_time}}更新</span>
             </div>
@@ -14,7 +16,7 @@
           <div class="gradient"></div>
         </div>
         <ul class="songList">
-          <li v-for="(item, index) in topData.songlist">
+          <li v-for="(item, index) in topData.songlist" @click="$store.dispatch('addMusic', item.data)">
             <!--<router-link :to="{name: 'play', params: {val: item}}">-->
             <h3 class="song_name">{{item.data.songname}}(Live)</h3>
             <p class="song_des">{{item.data.singer[0].name}}·{{item.data.albumname}}</p>
@@ -23,9 +25,6 @@
         </ul>
       </div>
       <v-back class="back"></v-back>
-      <div>
-        <loading></loading>
-      </div>
     </div>
   </transition>
 </template>
@@ -38,17 +37,28 @@
   export default {
     data () {
       return {
-        topData: {}
+        topData: {},
+        topInfo: {}
       }
     },
     mounted () {
       this._getTopList(this.$route.params.valId)
+//      var id = this.$route.params.valId
+//      var url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg?g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&tpl=3&page=detail&type=top&topid=' + id + '&_=1492910996732'
+//      this.$http.jsonp(url, {
+//        jsonp: 'jsonpCallback'
+//      }).then((res) => {
+//        console.log(res.data)
+//        this.topData = res.data
+//        this.topInfo = res.data.topinfo
+//      })
     },
     methods: {
       _getTopList (topId) {
         getTopList(topId).then((res) => {
           console.log(res)
           this.topData = res
+          this.topInfo = res.topinfo
         })
       }
     },
@@ -169,6 +179,12 @@
           overflow: hidden;
         }
       }
+    }
+    .loading_container{
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 </style>

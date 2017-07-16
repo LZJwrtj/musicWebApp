@@ -63,7 +63,7 @@
   }
 </script>
 
-<style lang="less" rel="stylesheet/less" scope>
+<style lang="less" rel="stylesheet/less" scoped>
   #slide{
     height: 3rem;
   }

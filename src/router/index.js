@@ -2,9 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import recommend from '@/components/recommend/recommend'
 import rank from '@/components/rank/rank'
-import songList from '@/components/songList/songList'
-import radio from '@/components/radio/radio'
-import MV from '@/components/MV/MV'
+import search from '@/components/search/search'
 import hotListYe from '../components/hotListYe/hotListYe.vue'
 import rankList from '../components/rankList/rankList.vue'
 
@@ -19,22 +17,10 @@ export default new Router({
     {
       path: '/rank',
       component: rank
-      // children: [{
-      //   path: ':valId',
-      //   component: rankList
-      // }]
     },
     {
-      path: '/songList',
-      component: songList
-    },
-    {
-      path: '/radio',
-      component: radio
-    },
-    {
-      path: '/MV',
-      component: MV
+      path: '/search',
+      component: search
     },
     {
       path: '*',
@@ -42,12 +28,12 @@ export default new Router({
     },
     {
       name: 'hotListYe',
-      path: '/hotListYe/:valId',
+      path: '/recommend/hotListYe/:valId',
       component: hotListYe
     },
     {
       name: 'rankList',
-      path: '/rankList/:valId',
+      path: '/rank/rankList/:valId',
       component: rankList
     }
   ]

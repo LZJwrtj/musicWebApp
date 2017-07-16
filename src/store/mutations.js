@@ -22,8 +22,8 @@ export default {
     state.playState = true
     state.musicList.push(obj)
     state.musicPlace = state.musicList.length - 1
-    state.location = 'http://ws.stream.qqmusic.qq.com/' + state.musicList[state.musicPlace].id + '.m4a?fromtag=46'
-    // state.location = 'http://ws.stream.qqmusic.qq.com/' + obj.id + '.m4a?fromtag=46'
+    var id = state.musicList[state.musicPlace].id ? state.musicList[state.musicPlace].id : state.musicList[state.musicPlace].songid
+    state.location = 'http://ws.stream.qqmusic.qq.com/' + id + '.m4a?fromtag=46'
   },
   [types.PLAY] (state) {
     state.playState = true
@@ -38,7 +38,8 @@ export default {
       state.musicPlace--
     }
     state.playState = true
-    state.location = 'http://ws.stream.qqmusic.qq.com/' + state.musicList[state.musicPlace].id + '.m4a?fromtag=46'
+    var id = state.musicList[state.musicPlace].id ? state.musicList[state.musicPlace].id : state.musicList[state.musicPlace].songid
+    state.location = 'http://ws.stream.qqmusic.qq.com/' + id + '.m4a?fromtag=46'
   },
   [types.NEXTSONG] (state) {
     if (state.musicPlace === state.musicList.length - 1) {
@@ -47,7 +48,18 @@ export default {
       state.musicPlace++
     }
     state.playState = true
-    state.location = 'http://ws.stream.qqmusic.qq.com/' + state.musicList[state.musicPlace].id + '.m4a?fromtag=46'
+    var id = state.musicList[state.musicPlace].id ? state.musicList[state.musicPlace].id : state.musicList[state.musicPlace].songid
+    state.location = 'http://ws.stream.qqmusic.qq.com/' + id + '.m4a?fromtag=46'
+  },
+  [types.LOOPPLAY] (state) {
+    if (state.musicPlace >= state.musicList.length - 1) {
+      state.musicPlace = 0
+    } else {
+      state.musicPlace++
+    }
+    // state.playState = true
+    var id = state.musicList[state.musicPlace].id ? state.musicList[state.musicPlace].id : state.musicList[state.musicPlace].songid
+    state.location = 'http://ws.stream.qqmusic.qq.com/' + id + '.m4a?fromtag=46'
   },
   [types.SHOWMUSICLIST] (state) {
     state.isMusicList = true

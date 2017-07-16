@@ -23,6 +23,8 @@ export default {
   songImg (state) {
     if (state.musicList.length === 0) {
       return '/static/img/defaultSongImg.jpg'
+    } else if (state.musicList[state.musicPlace].albummid) {
+      return 'https://y.gtimg.cn/music/photo_new/T002R150x150M000' + state.musicList[state.musicPlace].albummid + '.jpg?max_age=2592000'
     } else {
       return 'https://y.gtimg.cn/music/photo_new/T002R150x150M000' + state.musicList[state.musicPlace].album.mid + '.jpg?max_age=2592000'
     }
@@ -30,6 +32,8 @@ export default {
   songInfo (state) {
     if (state.musicList.length === 0) {
       return {name: 'qq音乐', author: '最好听的音乐'}
+    } else if (state.musicList[state.musicPlace].songname) {
+      return {name: state.musicList[state.musicPlace].songname, author: state.musicList[state.musicPlace].singer[0].name}
     } else {
       return {name: state.musicList[state.musicPlace].name, author: state.musicList[state.musicPlace].singer[0].name}
     }
