@@ -1,0 +1,17 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>music-app</title><link rel=stylesheet href=./static/css/reset.css><link rel=stylesheet href=./static/css/font-awesome.css><script>(function (doc, win) {
+      var docEle = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+          var clientWidth = docEle.clientWidth;
+          if (!clientWidth) return;
+          if (clientWidth >= 1920) {
+            docEle.style.fontSize = '100px';
+          } else {
+            docEle.style.fontSize = 100 * (clientWidth / 750) + 'px';
+          }
+        };
+
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);</script><link href=./static/css/app.b8efe5d8b3cb60a0f39209cfbe03df97.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.fc5fe976ac2154dd98f4.js></script><script type=text/javascript src=./static/js/vendor.21db003a80741eaba922.js></script><script type=text/javascript src=./static/js/app.d9cd4ce6cc0bc038f794.js></script></body></html>
