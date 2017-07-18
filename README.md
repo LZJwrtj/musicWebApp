@@ -38,11 +38,10 @@
 
 ## 部分页面展示
 
-> 推荐页   > 推荐列表详情页
-
 ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/static/img/recommend.png)    ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/static/img/hotlist.png)        ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/static/img/rank.png)
 
 ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/static/img/play.png)        ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/static/img/musiclist.png)
+
 ## Build Setup
 
 ``` bash
