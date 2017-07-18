@@ -73,6 +73,9 @@
         line-height: 0.9rem;
         font-size: 0.3rem;
         color: #ffffff;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
         border-bottom: 1px solid #ccc;
         i {
           position: absolute;
