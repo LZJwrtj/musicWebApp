@@ -8,6 +8,8 @@
 
 ## 项目组成
 
+![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/vueMusic.png)
+
 ## 组件部分
 
 - header 头部部分
