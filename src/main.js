@@ -3,20 +3,24 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import vueResource from 'vue-resource'
-import VueAwesomeSweper from 'vue-awesome-swiper'
-import MintUI from 'mint-ui'
-import 'mint-ui/lib/style.css'
 import store from './store'
+import fastclick from 'fastclick'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import VueLazyLoad from 'vue-lazyload'
+import MintUI from 'mint-ui'
 
-Vue.use(VueAwesomeSweper)
-Vue.use(MintUI)
-Vue.use(vueResource)
-// import axios from 'axios'
-// Vue.prototype.$http = axios
+import 'assets/css/index.css'
+import 'mint-ui/lib/style.css'
 
 Vue.config.productionTip = false
 
+Vue.use(VueAwesomeSwiper)
+Vue.use(MintUI)
+Vue.use(VueLazyLoad, {
+  loading: require('assets/img/default.gif')
+})
+
+fastclick.attach(document.body)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

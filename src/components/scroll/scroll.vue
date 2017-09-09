@@ -6,7 +6,6 @@
 
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll'
-
   export default {
     props: {
       probeType: {
@@ -17,25 +16,13 @@
         type: Boolean,
         default: true
       },
-      listenScroll: {
-        type: Boolean,
-        default: false
-      },
       data: {
         type: Array,
         default: null
       },
-      pullup: {
+      pullUp: {
         type: Boolean,
         default: false
-      },
-      beforeScroll: {
-        type: Boolean,
-        default: false
-      },
-      refreshDelay: {
-        type: Number,
-        default: 20
       }
     },
     mounted () {
@@ -45,40 +32,24 @@
     },
     methods: {
       _initScroll () {
-        if (!this.$refs.wrapper) {
-          return
-        }
+        if (!this.$refs.wrapper) return
         this.scroll = new BScroll(this.$refs.wrapper, {
           probeType: this.probeType,
           click: this.click
         })
-
-        if (this.listenScroll) {
-          let me = this
-          this.scroll.on('scroll', (pos) => {
-            me.$emit('scroll', pos)
-          })
-        }
-
-        if (this.pullup) {
+        if (this.pullUp) {
           this.scroll.on('scrollEnd', () => {
             if (this.scroll.y <= (this.scroll.maxScrollY + 50)) {
               this.$emit('scrollToEnd')
             }
           })
         }
-
-        if (this.beforeScroll) {
-          this.scroll.on('beforeScrollStart', () => {
-            this.$emit('beforeScroll')
-          })
-        }
-      },
-      disable () {
-        this.scroll && this.scroll.disable()
       },
       enable () {
         this.scroll && this.scroll.enable()
+      },
+      disable () {
+        this.scroll && this.scroll.disable()
       },
       refresh () {
         this.scroll && this.scroll.refresh()
@@ -94,12 +65,12 @@
       data () {
         setTimeout(() => {
           this.refresh()
-        }, this.refreshDelay)
+        }, 20)
       }
     }
   }
 </script>
 
-<style>
+<style lang="less" rel="stylesheet/less" scoped>
 
 </style>

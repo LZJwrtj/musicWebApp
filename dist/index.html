@@ -1,17 +1,16 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>music-app</title><link rel=stylesheet href=./static/css/reset.css><link rel=stylesheet href=./static/css/font-awesome.css><script>(function (doc, win) {
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"><title>musicapp</title><script>(function (doc, win) {
       var docEle = doc.documentElement,
         resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
         recalc = function () {
           var clientWidth = docEle.clientWidth;
           if (!clientWidth) return;
-          if (clientWidth >= 1920) {
+          if (clientWidth > 1024) {
             docEle.style.fontSize = '100px';
           } else {
             docEle.style.fontSize = 100 * (clientWidth / 750) + 'px';
           }
-        };
-
+      }
       if (!doc.addEventListener) return;
       win.addEventListener(resizeEvt, recalc, false);
       doc.addEventListener('DOMContentLoaded', recalc, false);
-    })(document, window);</script><link href=./static/css/app.f9452e9878908316b5683ac44ad3421e.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.de3034a0575e5df9f3b1.js></script><script type=text/javascript src=./static/js/vendor.0da34f78ed4e8dbebdff.js></script><script type=text/javascript src=./static/js/app.c95158735ae08d82f64b.js></script></body></html>
+    })(document, window)</script><link href=./static/css/app.b5e9163853949e084696390a7f66b5f7.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.212b6f9af5911fbb96fb.js></script><script type=text/javascript src=./static/js/vendor.a3b4f91ce600e7620413.js></script><script type=text/javascript src=./static/js/app.b1f11bb756343acf8b35.js></script></body></html>

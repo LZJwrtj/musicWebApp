@@ -1,115 +1,143 @@
 <template>
   <div id="rank">
-    <ul class="rank_content">
-      <li class="rank_list" v-for="item in topList">
-        <div class="img_wrapper">
-          <img :src="item.picUrl" alt="">
-        </div>
-        <router-link :to="{name: 'rankList', params: {valId: item.id}}">
-          <div class="songList">
-            <h3 class="songList_title">{{item.topTitle}}</h3>
-            <p class="songList_name" v-for="(val, index) in item.songList">{{index + 1}} <span class="songName">{{val.songname}}</span> - {{val.singername}}</p>
+    <scroll class="rank_wrapper" :data="ranks">
+      <ul class="rank_content">
+        <li class="rank_list" v-for="item in ranks" :key="item.id" @click="selectItem(item)">
+          <div class="img_wrapper">
+            <img :src="item.picUrl" alt="">
+            <span class="count">
+            <i class="icon-earphone"></i>
+            {{(item.listenCount / 10000).toFixed(1)}}万
+          </span>
           </div>
-          <div class="arrow">
-            <i class="fa fa-angle-right"></i>
+          <div class="rank_list_content">
+            <h2 class="rank_list_title">{{item.topTitle}}</h2>
+            <p class="rank_list_song" v-for="(song, index) in item.songList" :key="song.id">
+              {{index}} {{song.songname}}-{{song.singername}}
+            </p>
+            <span class="arrow">></span>
           </div>
-        </router-link>
-      </li>
-    </ul>
-    <div class="loading_container" v-show="!topList.length">
+        </li>
+      </ul>
       <loading></loading>
-    </div>
+    </scroll>
+    <router-view></router-view>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import { getRank } from 'api/rank'
-  import loading from '../loading/loading.vue'
+  import {getRank} from 'api/rank'
+  import Scroll from 'components/scroll/scroll'
+  import {mapMutations} from 'vuex'
+  import Loading from 'components/loading/loading'
+
   export default {
-    data () {
+    data() {
       return {
-        topList: []
+        ranks: []
       }
     },
-    created () {
-      this._getRankList()
+    created() {
+      this._getRank()
     },
     methods: {
-      _getRankList () {
+      _getRank() {
         getRank().then((res) => {
-          console.log(res.data)
-          this.topList = res.data.topList
+          this.ranks = res.data.topList
         })
-      }
+      },
+      selectItem(item) {
+        this.$router.push({
+          path: `/rank/${item.id}`
+        })
+        this.set_rank(item)
+      },
+      ...mapMutations({
+        set_rank: 'SET_RANK'
+      })
     },
     components: {
-      loading
+      Scroll,
+      Loading
     }
   }
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
   #rank {
-    font-size: 0.28rem;
     width: 100%;
-    padding: 0.2rem;
-    box-sizing: border-box;
+    .rank_wrapper {
+      position: fixed;
+      top: 1.2rem;
+      bottom: 0;
+      width: 100%;
+      overflow: hidden;
+    }
     .rank_content {
       width: 100%;
-      margin-bottom: 1.3rem;
+      padding: 0.2rem;
+      box-sizing: border-box;
       .rank_list {
+        /*display: flex;*/
         width: 100%;
         height: 2rem;
         margin-bottom: 0.2rem;
-        background: #ffffff;
+        background-color: #ffffff;
         .img_wrapper {
+          float: left;
+          position: relative;
           width: 2rem;
           height: 2rem;
-          float: left;
           img {
             width: 100%;
             height: 100%;
           }
+          .count {
+            position: absolute;
+            bottom: 0.15rem;
+            left: 0.1rem;
+            font-size: 0.26rem;
+            color: #ffffff;
+            opacity: 0.6;
+            font-weight: bold;
+            i {
+              font-size: 0.3rem;
+            }
+          }
         }
-        .songList {
-          width: 4.52rem;
-          height: 100%;
-          margin-left: 0.3rem;
-          float: left;
-          .songList_title, .songList_name {
+        .rank_list_content {
+          position: relative;
+          float: right;
+          width: 5rem;
+          font-size: 0.3rem;
+          padding-left: 0.3rem;
+          padding-right: 0.5rem;
+          box-sizing: border-box;
+          .rank_list_title{
+            width: 100%;
+            height: 0.52rem;
+            line-height: 0.52rem;
+            text-align: left;
+            font-size: 0.32rem;
+            color: #000;
+          }
+          .rank_list_song {
+            width: 100%;
+            height: 0.43rem;
+            line-height: 0.43rem;
+            font-size: 0.28rem;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
           }
-          .songList_title {
-            width: 100%;
-            height: 0.61rem;
-            line-height: 0.61rem;
-            margin-bottom: 0.04rem;
-            font-size: 0.32rem;
+          .arrow{
+            position: absolute;
+            top: 50%;
+            right: 0.17rem;
           }
-          .songList_name {
-            width: 100%;
-            line-height: 0.42rem;
-            color: rgba(0, 0, 0, .5);
-            .songName {
-              color: #000;
-            }
-          }
-        }
-        .arrow {
-          width: 0.28rem;
-          height: 2rem;
-          line-height: 2rem;
-          float: right;
         }
       }
     }
-    .loading_container {
-      position: absolute;
-      width: 100%;
-      top: 50%;
-      transform: translateY(-50%);
-    }
+
   }
 </style>

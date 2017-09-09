@@ -2,10 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <title>music-app</title>
-  <link rel="stylesheet" href="./static/css/reset.css">
-  <link rel="stylesheet" href="./static/css/font-awesome.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+  <title>musicapp</title>
   <script>
     (function (doc, win) {
       var docEle = doc.documentElement,
@@ -13,17 +11,16 @@
         recalc = function () {
           var clientWidth = docEle.clientWidth;
           if (!clientWidth) return;
-          if (clientWidth >= 1920) {
+          if (clientWidth > 1024) {
             docEle.style.fontSize = '100px';
           } else {
             docEle.style.fontSize = 100 * (clientWidth / 750) + 'px';
           }
-        };
-
+      }
       if (!doc.addEventListener) return;
       win.addEventListener(resizeEvt, recalc, false);
       doc.addEventListener('DOMContentLoaded', recalc, false);
-    })(document, window);
+    })(document, window)
   </script>
 </head>
 <body>

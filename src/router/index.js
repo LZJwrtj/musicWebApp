@@ -1,40 +1,54 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import recommend from '@/components/recommend/recommend'
-import rank from '@/components/rank/rank'
-import search from '@/components/search/search'
-import hotListYe from '../components/hotListYe/hotListYe.vue'
-import rankList from '../components/rankList/rankList.vue'
+import Recommend from '@/components/recommend/recommend'
+import Rank from '@/components/rank/rank'
+import Search from '@/components/search/search'
+import RecommendDetail from '@/components/recommendDetail/recommendDetail'
+import SingerDetail from '@/components/singerDetail/singerDetail'
+import Play from '@/components/player/player'
+import rankList from '@/components/rank-list/rank-list'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/recommend',
-      component: recommend
-    },
-    {
-      path: '/rank',
-      component: rank
-    },
-    {
-      path: '/search',
-      component: search
-    },
-    {
-      path: '*',
+      path: '/',
       redirect: '/recommend'
     },
     {
-      name: 'hotListYe',
-      path: '/recommend/hotListYe/:valId',
-      component: hotListYe
+      path: '/recommend',
+      component: Recommend,
+      children: [
+        {
+          path: ':id',
+          component: RecommendDetail
+        }
+      ]
     },
     {
-      name: 'rankList',
-      path: '/rank/rankList/:valId',
-      component: rankList
+      path: '/rank',
+      component: Rank,
+      children: [
+        {
+          path: ':id',
+          component: rankList
+        }
+      ]
+    },
+    {
+      path: '/search',
+      component: Search,
+      children: [
+        {
+          path: ':id',
+          component: SingerDetail
+        }
+      ]
+    },
+    {
+      path: '/player',
+      component: Play
     }
   ]
 })
