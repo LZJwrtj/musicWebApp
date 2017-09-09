@@ -4,7 +4,7 @@
 
 [项目演示地址](https://lzjwrtj.github.io/musicWebApp/dist/index.html)(PC端请在移动模式下演示)
 
-![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/static/img/qrcode.png)
+![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/qrcode_image.png)
 
 ## 项目组成
 
