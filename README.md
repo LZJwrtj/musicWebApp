@@ -46,9 +46,7 @@
 
 ## 部分页面展示
 
-![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/recommend.png)        ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/rank.png)        ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/search.png)
-
-![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/music-list.png)        ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/player.png)        ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/singerDetail.png)
+![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/recommend.png)        ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/rank.png)        ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/search.png)        ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/music-list.png)        ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/player.png)        ![预览](https://github.com/LZJwrtj/musicwebApp/blob/master/screen/singerDetail.png)
 
 ## Build Setup
 
