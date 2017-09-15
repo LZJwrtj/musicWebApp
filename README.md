@@ -16,7 +16,7 @@
 - tab 导航部分
 - recommend 推荐页面
 - recommendDetail 推荐列表详情
-- rank 排行榜页面
+- rank 排行页面
 - rank-list 排行列表详情
 - music-list 歌曲详情列表
 - song-list 歌曲列表
