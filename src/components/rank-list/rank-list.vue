@@ -19,6 +19,7 @@
       }
     },
     created() {
+    console.log(11)
       this._getRankList()
     },
     methods: {
